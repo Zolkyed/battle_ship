@@ -1,0 +1,30 @@
+image: debian:latest
+
+stages:
+  - build
+  - test
+
+before_script:
+  - apt-get update
+  - apt-get clean    
+  - apt-get autoclean 
+  - apt-get install -y build-essential make gcc libcunit1 libcunit1-dev bats git
+
+build:
+  stage: build
+  script:
+    - apt-get install -y make  
+    - make -f Makefile
+  only:
+    - main
+
+test:
+  stage: test
+  script:
+    - gcc ./tests/test_jeu.c ./jeu.c -o jeu_cunits -lcunit
+    - gcc ./tests/test_statistiques.c ./jeu.c ./statistiques.c -o statistiques_cunits -lcunit
+    - ./jeu_cunits
+    - ./statistiques_cunits
+    - bats tests/bataille_navale.bats
+  only:
+    - main

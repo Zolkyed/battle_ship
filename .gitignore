@@ -1,0 +1,18 @@
+# Fichiers générés 
+.idea/
+
+# Fichiers compilés 
+*.o
+*.out
+
+# Fichiers temporaires
+.DS_Store
+
+# Programme exécutable
+bataille_navale
+
+# Tests Cunits
+*.cunits
+jeu_cunits
+statistiques_cunits
+main_cunits
